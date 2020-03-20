@@ -1,0 +1,8 @@
+Login Testing scenario.
+6 Testing cases :
+1-Usrename is correct and password is incorrect.
+2-Password is correct and username is incorrect.
+3-Pressing Login without filling ueser name or password palces.
+4-Entering username without password.
+5-Entering password without username.
+6-Normal Login.
