@@ -71,5 +71,31 @@ describe('Login fuctionality', () => {
        
     })
 
+    // it('should open forgot password window correctly', () => {
+    //     cy.visit("F")
+
+    //     cy.get('a[id="reset-password-link"]').click()
+
+    //     cy.get('h1')
+    //       .invoke('text')
+    //       .should('equal', '\n تمت إعادة تعيين كلمة المرور \n');
+
+     
+    // })
+
+    it('should open signup window correctly', () => {
+      cy.visit("F")
+
+      cy.get('a[id="sign-up-link"]').click()
+
+      cy.get('h2')
+        .invoke('text')
+        .should('equal', 'تسجيل الاشتراك بعنوان بريدك الإلكتروني');
+
+   
+  })
+
+    
+
 
 })
