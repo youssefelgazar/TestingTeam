@@ -1,6 +1,6 @@
 describe('Login fuctionality', () => {
     it('should respond with error when filling username space and not password space' , () => {
-        cy.visit("F")
+        cy.visit("/login")
 
 
         cy.get('input[id="login-username"]').type('youssef.elgazar99@icloud.com')
@@ -15,7 +15,7 @@ describe('Login fuctionality', () => {
     })
 
     it('should respond with error when filling password space and not username space' , () => {
-        cy.visit("F")
+        cy.visit("/login")
 
 
         cy.get('input[id="login-password"]').type('YoussefN99')
@@ -28,7 +28,7 @@ describe('Login fuctionality', () => {
     })
 
     it('should respond with error when entering wrong username or password' , () => {
-        cy.visit("F")
+        cy.visit("/login")
 
         cy.get('input[id="login-username"]').type('youssef.elgazar99@icloud.com')
 
@@ -56,7 +56,7 @@ describe('Login fuctionality', () => {
     })
 
     it('should respond with error when not filling both places(username and password)' , () => {
-        cy.visit("F")
+        cy.visit("/login")
 
         cy.get('button[id="login-button"]').click()
 
@@ -72,7 +72,7 @@ describe('Login fuctionality', () => {
     })
 
     // it('should open forgot password window correctly', () => {
-    //     cy.visit("F")
+    //     cy.visit("/login")
 
     //     cy.get('a[id="reset-password-link"]').click()
 
@@ -84,7 +84,7 @@ describe('Login fuctionality', () => {
     // })
 
     it('should open signup window correctly', () => {
-      cy.visit("F")
+      cy.visit("/login")
 
       cy.get('a[id="sign-up-link"]').click()
 
