@@ -50,7 +50,7 @@ describe('SideBarAndNavBar',function(){
     cy.contains('Test').should('be.visible')
     cy.contains('Home').should('be.visible').click()
     })
-    
+
 
     //acount icon
     //upgrade- account btfta7 new tab 
