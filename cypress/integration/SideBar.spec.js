@@ -1,5 +1,14 @@
 describe('SideBarAndNavBar',function(){
      // Sign in func in commands.js
+     /*Cypress.Commands.add("SignIn",() =>{
+    cy.visit('https://accounts.spotify.com/en/login?continue=https:%2F%2Fopen.spotify.com%2F')
+    cy.get('input[id="login-username"]').type('saad.dine98@eng-st.cu.edu.eg')
+    cy.get('input[id="login-password"]').type('u%GJG,fHdz6#g2F')
+    cy.get('button[id="login-button"]').click()
+    cy.contains('Spotify',{timeout:10000}).should('be.visible')
+    cy.location('protocol').should('eq','https:') 
+
+    })*/
     beforeEach(function () {
         cy.SignIn()
     })
