@@ -1,101 +1,108 @@
 describe('Login fuctionality', () => {
     it('should respond with error when filling username space and not password space' , () => {
-        cy.visit("/login")
+        cy.visit("/")
 
 
-        cy.get('input[id="login-username"]').type('youssef.elgazar99@icloud.com')
+        cy.get('input[name="identifier"]').type('youssef.elgazar99@icloud.com')
         
-        cy.get('button[id="login-button"]').click()
+        cy.get('button[class="btn"]').click()
 
-        cy.get('label[class="control-label-validation ng-binding ng-scope"]')
+        cy.get('div[class="error"]')
           .invoke('text')
-          .should('equal', 'Please enter your password.');
+          .should('equal', 'Incorrect user or passwordPlease enter your password.' );
 
 
     })
 
     it('should respond with error when filling password space and not username space' , () => {
-        cy.visit("/login")
+        cy.visit("/")
 
 
-        cy.get('input[id="login-password"]').type('YoussefN99')
+        cy.get('input[name="password"]').type('YoussefN99')
         
-        cy.get('button[id="login-button"]').click()
+        cy.get('button[class="btn"]').click()
 
-        cy.get('label[ng-if="accounts.username.$error.required"]')
+        cy.get('div[class="error"]')
           .invoke('text')
-          .should('equal', 'Please enter your Spotify username or email address.');
+          .should('equal', 'Incorrect user or passwordPlease enter your Spotify username or email address.');
     })
 
     it('should respond with error when entering wrong username or password' , () => {
-        cy.visit("/login")
+        cy.visit("/")
 
-        cy.get('input[id="login-username"]').type('youssef.elgazar99@icloud.com')
+        cy.get('input[name="identifier"]').type('youssef.elgazar99@icloud.com')
 
-        cy.get('input[id="login-password"]').type('YoussefV99')
+        cy.get('input[name="password"]').type('YoussefV99')
 
-        cy.get('button[id="login-button"]').click()
+        cy.get('button[class="btn"]').click()
 
-        cy.get('span[ng-if="response.error"]')
+        cy.get('div[class="error"]')
           .invoke('text')
-          .should('equal', 'Incorrect username or password.');
+          .should('equal', 'Incorrect user or password');
 
-        cy.get('input[id="login-username"]')
+        cy.get('input[name="identifier"]')
           .clear()
           .type('yussef.elgazar99@icloud.com')
 
-        cy.get('input[id="login-password"]')
+        cy.get('input[name="password"]')
           .clear()
           .type('YoussefN99')
   
-        cy.get('button[id="login-button"]').click()
+        cy.get('button[class="btn"]').click()
 
-        cy.get('span[ng-if="response.error"]')
+        cy.get('div[class="error"]')
           .invoke('text')
           .should('equal', 'Incorrect username or password.');
     })
 
     it('should respond with error when not filling both places(username and password)' , () => {
-        cy.visit("/login")
+        cy.visit("/")
 
-        cy.get('button[id="login-button"]').click()
+        cy.get('button[class="btn"]').click()
 
-        cy.get('label[ng-if="accounts.username.$error.required"]')
+        cy.get('div[class="error"]')
           .invoke('text')
-          .should('equal', 'Please enter your Spotify username or email address.');
-
-        cy.get('label[ng-if="accounts.password.$error.required"]')
-          .invoke('text')
-          .should('equal', 'Please enter your password.');
+          .should('equal', 'Incorrect user or passwordPlease enter your Spotify username or email address.Please enter your password.');
 
        
     })
 
-    // it('should open forgot password window correctly', () => {
-    //     cy.visit("/login")
+    it('should open forgot password window correctly', () => {
+        cy.visit("/")
 
-    //     cy.get('a[id="reset-password-link"]').click()
+        cy.get('a[class="hyperLink"]').click()
 
-    //     cy.get('h1')
-    //       .invoke('text')
-    //       .should('equal', '\n تمت إعادة تعيين كلمة المرور \n');
-
+         cy.url().should('include', '/page')
      
-    // })
+    })
 
     it('should open signup window correctly', () => {
-      cy.visit("/login")
+      cy.visit("/")
 
-      cy.get('a[id="sign-up-link"]').click()
+      cy.get('a[class="btn3"]').click()
 
-      cy.get('h2')
-        .invoke('text')
-        .should('equal', 'تسجيل الاشتراك بعنوان بريدك الإلكتروني');
+      cy.url().should('include', '/signup')
 
-   
-  })
+    })
 
+    it('should take you to the continue with facebook page' , () => {
+      cy.visit("/")
+      cy.get('button[class="btn2"]').click()
+      cy.url().should('include', '/ContinueWithFacebook')
+
+    })
+    it('should login naturally when entering right credentials' , () => {
+        cy.visit("/")
+
+        cy.get('input[name="identifier"]').type('youssef.elgazar99@icloud.com')
+
+        cy.get('input[name="password"]').type('YoussefN99')
+
+        cy.get('button[class="btn"]').click()
+
+        cy.url().should('include','/Home')
+
+    })
     
 
-
-})
+ })
