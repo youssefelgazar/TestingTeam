@@ -1,69 +1,64 @@
 describe('Sign up validity',() => {
     it('checks page redial',()=>{
         cy.visit('/signup')
-           cy.get('input[id="register-email"]').type("dummy@yahoo.com")
-           cy.get('a[id="register-button-email-submit"]').click()
-           cy.url().should('include', '/signup')
+        cy.url().should('include', '/signup')
     })
-    it('checks error messages',()=>{ 
-        cy.get('input[id="register-email"]').type("dummy@yahoo.com")
-        cy.get('a[id="register-button-email-submit"]').click()    
-        cy.get('label[for="register-password"]')
-                .invoke("text")
-                .should('equal', 'PasswordEnter a password to continue.');
-    })            
-
-    it('triggers all type of almost complete signup',()=>{
+    it('checks invalid email handling',()=>{ 
+        cy.get('#signupForm > div > input:nth-child(11)').type("dummyyahoo.com")
+        cy.get('#signupForm > div > div:nth-child(12)').should('exist')
         
-        cy.get('input[id="register-email"]').type("piocv@yahoo.com")
-        cy.get('input[id="register-confirm-email"]').type("piocv@yahoo.com")
-        cy.get('input[id="register-password"]').type("encryption")
-        cy.get('input[id="register-displayname"]').type("name")
-        cy.get('input[id="register-male"]').check()
-        cy.get('input[id="register-dob-day"]').type("2")
-        cy.get('input[id="register-dob-year"]').type("1999")
-        cy.get('a[id="register-button-email-submit"]').click()
-        
-        cy.get('label[for="register-dob-month"]')
-               .invoke("text")
-               .should('equal','Please enter your birth month.')
-          
-    })
-    it('Not equal confirmed email',()=>{
-        cy.get('input[id="register-email"]').clear()
-        cy.get('input[id="register-email"]').type("piocv@yahoo.com")
-        cy.get('input[id="register-confirm-email"]').clear()
-        cy.get('input[id="register-confirm-email"]').type("piov@yahoo.com")
-       
-        cy.get('a[id="register-button-email-submit"]').click()
-        
-        cy.get('label[for="register-confirm-email"]')
-                .invoke("text")
-                .should('equal',"Confirm emailEmail address doesn't match.")
-                
-    })            
-    it('checks logical year ',()=>{
-
-        cy.get('input[id="register-dob-year"]').clear()
-        cy.get('input[id="register-dob-year"]').type("2021")
-        cy.get('label[for="register-dob-year"]')
-                 .invoke("text")
-                 .should('equal',"Sorry, but you don't meet Spotify's age requirements.")
-
-    
             
-       
-         
+    })            
+
+   
+    it('Checks underage warning label',()=>{
+        cy.get('#signupForm > div > input:nth-child(20)').clear()
+        cy.get('#signupForm > div > input:nth-child(20)').type('2')
+        cy.get('#signupForm > div > div:nth-child(21)').should('exist')
+        
+    })            
+    it('checks unsatisfying password',()=>{
+
+        cy.get('#signupForm > div > input:nth-child(17)').clear()
+        cy.get('#signupForm > div > input:nth-child(17)').type("low")
+        cy.get('#signupForm > div > div:nth-child(18)').should('exist')
     })
-    it('Unsatisfying password',()=>{
-        cy.get('input[id="register-password"]').clear()
-        cy.get('input[id="register-password"]').type("en")
-        cy.get('label[for="register-password"]')
-                .invoke("text")
-                .should('equal',"PasswordYour password is too short.")
-      
+    it('Checks DropBox functioning',()=>{
+        cy.get('#select').select('Male')
+              .invoke("text")
+              .should('equal','Male')
+
+    })
+    it('Check complete SignUp indication',()=>{
+        cy.get('#signupForm > div > input:nth-child(11)').clear() 
+        cy.get('#signupForm > div > input:nth-child(11)').type("piocv@yahoo.com")
+        cy.get('#signupForm > div > input:nth-child(17)').clear()
+        cy.get('#signupForm > div > input:nth-child(17)').type("encryption")
+        cy.get('#signupForm > div > input:nth-child(14)').type("name")
+        cy.get('#signupForm > div > input:nth-child(20)').clear()
+        cy.get('#signupForm > div > input:nth-child(20)').type('20')  
+        cy.get('#signupForm > div > button.btn').click()
+        cy.get('#signupForm > div > div.errormsg2').should('exist')
+
+    })
+    it('Check another SignUp with same information',()=>{
+        cy.get('#signupForm > div > input:nth-child(11)').clear() 
+        cy.get('#signupForm > div > input:nth-child(11)').type("piocv@yahoo.com")
+        cy.get('#signupForm > div > input:nth-child(17)').clear()
+        cy.get('#signupForm > div > input:nth-child(17)').type("encryption")
+        cy.get('#signupForm > div > input:nth-child(14)').type("name")
+        cy.get('#signupForm > div > input:nth-child(20)').clear()
+        cy.get('#signupForm > div > input:nth-child(20)').type('20')  
+        cy.get('#signupForm > div > button.btn').click()
+        cy.get('#signupForm > div > div.errormsg2').should('not.exist')
+
+    })
+    it('Checks login button renders a /login',()=>{
+        cy.get('#forlogin').click()
+        cy.url().should('include', '/login')        
 
 
-
-     })
+    })
+  
+     
 })

@@ -13,7 +13,7 @@ describe('SideBarAndNavBar',function(){
         cy.SignIn()
     })
 
-     //Clik on Search, Assertion, Search for smt tere, Searc for smt not there
+     //Clik on Search, Assertion, Search for smt there, Searc for smt not there
     it('Search',function(){                 
     cy.contains('Search').should('be.visible').click()
     cy.url().should('include','/search')
