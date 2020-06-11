@@ -13,3 +13,7 @@ Required Installations:
 4. after installing cypress open the folder of installation as a directory and use the command "npx cypress open"
 5.The .js tests must be inside the integration folder of cypress
 6.click on the test and it will automatically run  
+
+# Tasks distripution:
+1. Ahmed Eltaher [Web : Signup test, Account profile test, Songbar test, Premium page test  Android : Sign up test - Settings]
+Main challenge : Testing browsers are having discrepancies, Constant updates of spotify website leads to outdated tests.
