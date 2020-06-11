@@ -1,0 +1,58 @@
+///  <reference types="Cypress" /> 
+describe('Account Overview  ',function(){
+    beforeEach(function(){
+        
+        cy.fixture('example.json').then(function(data){
+            this.data=data 
+        })
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        }) 
+        
+    })
+    it('Account Overview ',function(){ 
+        cy.visit('https://www.spotify.com/eg-en/')
+        cy.get(':nth-child(6) > .mh-header-secondary').click()
+        cy.get('#login-username').type('Youssef.elgazar99@icloud.com')
+        cy.get('#login-password').type('YoussefN99')
+        cy.get('#login-button').click()
+        cy.wait(5000)
+        cy.get('.sc-fzpkqZ').should('be.visible')
+        cy.get('.sc-fzpkqZ').invoke('text').should('eq','Get 3 months of Premium for free')
+        cy.get('.sc-fznAgC').should('be.visible')
+        cy.get('.sc-fznAgC').invoke('text').should('eq','Enjoy endless ad-free music - even offline.')
+        cy.get(':nth-child(1) > .Button-oyfj48-0').should('be.visible')
+        cy.get(':nth-child(2) > .Button-oyfj48-0').should('be.visible')
+        cy.get('.Page__root--1FPjH > :nth-child(1) > .Type__TypeElement-sc-9snywk-0').scrollIntoView().should('be.visible')
+        cy.get('.Page__root--1FPjH > :nth-child(1) > .Type__TypeElement-sc-9snywk-0').invoke('text').should('eq','Account overview')
+        cy.get(':nth-child(2) > .bmolDe').should('be.visible')
+        cy.get(':nth-child(2) > .bmolDe').invoke('text').should('eq','Profile')
+        cy.get(':nth-child(2) > div > .CTA__root--3drmT').should('be.visible')
+        cy.get('#your-plan > .Section__title--3STe6').scrollIntoView().should('be.visible')
+        cy.get('#your-plan > .Section__title--3STe6').invoke('text').should('eq','Your plan')
+        cy.get('#your-plan > :nth-child(3) > .CTA__root--3drmT').should('be.visible')
+        cy.get(':nth-child(4) > .bmolDe').scrollIntoView().should('be.visible')
+        cy.get(':nth-child(4) > .bmolDe').invoke('text').should('eq','Signout everywhere')
+        cy.get(':nth-child(4) > .CTA__root--3drmT').should('be.visible')
+        cy.get('.Page__root--1FPjH > :nth-child(1) > .Type__TypeElement-sc-9snywk-0').scrollIntoView()
+        cy.get('#icon-user > path').should('be.visible')
+        cy.get('#overview > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#overview > .Menu__menuLink--3F9Kb').invoke('text').should('eq','homeAccount overview')
+        cy.get('#profile > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#profile > .Menu__menuLink--3F9Kb').invoke('text').should('eq','editEdit profile')
+        cy.get('#change_password > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#change_password > .Menu__menuLink--3F9Kb').invoke('text').should('eq','lockedChange password')
+        cy.get('#notifications > .Menu__menuLink--3F9Kb').scrollIntoView().should('be.visible')
+        cy.get('#notifications > .Menu__menuLink--3F9Kb').invoke('text').should('eq','notificationsNotification settings')
+        cy.get('#privacy > .Menu__menuLink--3F9Kb').should('be.visible') 
+        cy.get('#privacy > .Menu__menuLink--3F9Kb').invoke('text').should('eq','lockedPrivacy settings')
+        cy.get('#recover_playlists > .Menu__menuLink--3F9Kb').scrollIntoView().should('be.visible')
+        cy.get('#recover_playlists > .Menu__menuLink--3F9Kb').invoke('text').should('eq','refreshRecover playlists')
+        cy.get('#receipts > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#receipts > .Menu__menuLink--3F9Kb').invoke('text').should('eq','payment-historyReceipts')
+        cy.get('#apps > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#apps > .Menu__menuLink--3F9Kb').invoke('text').should('eq','appsApps')
+        cy.get('#redeem > .Menu__menuLink--3F9Kb').should('be.visible')
+        cy.get('#redeem > .Menu__menuLink--3F9Kb').invoke('text').should('eq','redeemRedeem')
+    })
+})

@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("SignIn",() =>{
+    cy.visit('https://accounts.spotify.com/en/login/?continue=https:%2F%2Fwww.spotify.com%2Fapi%2Fgrowth%2Fl2l-redirect&_locale=en-IS')
+    cy.get('input[id="login-username"]').type('Youssef.elgazar99@icloud.com')
+    cy.get('input[id="login-password"]').type('YoussefN99')
+    cy.get('button[id="login-button"]').click()
+    cy.contains('Spotify',{timeout:10000}).should('be.visible')
+    cy.location('protocol').should('eq','https:') 
+    })

@@ -1,6 +1,6 @@
 describe('Sign up validity',() => {
     it('checks page redial',()=>{
-        cy.visit('/signup')
+        cy.visit('https://accounts.spotify.com/en/signup')
         cy.url().should('include', '/signup')
     })
     it('checks invalid email handling',()=>{ 
